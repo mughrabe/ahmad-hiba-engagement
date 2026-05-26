@@ -2837,3 +2837,147 @@ textarea {
     padding-block: 0.66rem;
   }
 }
+
+/* =========================================================
+   FINAL ARABIC GLYPH SAFETY PATCH — no cropped tashkeel/letters
+   Arabic display text can be clipped by tight mobile line-height and
+   by background-clip:text. These rules intentionally override the
+   compact mobile rules at the very end of the stylesheet.
+   ========================================================= */
+
+.hero__names,
+.hero__name,
+.section__header,
+.section__title,
+.section__title .ar,
+.final__title,
+.final__title .ar,
+.family-card__name,
+.family-card__name .ar,
+.detail-card__value strong,
+.detail-card__value .ar,
+.rsvp-success__title,
+.rsvp-success__title .ar,
+.invite__verse-ar,
+.hero__bismillah,
+.hero__bismillah .ar,
+.invite__greeting,
+.invite__greeting.ar,
+.final__names,
+.final__names .ar {
+  overflow: visible !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The large Arabic names are the most sensitive because أحمد has a hamza
+   above the alif. Use solid color instead of clipped gradient text. */
+.hero__name {
+  display: block;
+  line-height: 1.58 !important;
+  padding-block: 0.24em 0.22em !important;
+  letter-spacing: 0 !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  color: var(--rose-deep) !important;
+  -webkit-text-fill-color: var(--rose-deep) !important;
+  text-shadow: 0 1px 0 rgba(255, 250, 242, 0.6), 0 10px 24px rgba(168, 94, 72, 0.12);
+}
+
+/* Arabic headings with tashkeel, such as شَرَفُ الدَّعوة, need generous
+   line boxes and must not inherit transparent gradient fill. */
+[dir="rtl"] .section__title,
+[dir="rtl"] .final__title,
+[dir="rtl"] .family-card__name,
+[dir="rtl"] .rsvp-success__title,
+[dir="rtl"] .final__names {
+  line-height: 1.75 !important;
+  padding-block: 0.24em 0.22em !important;
+  letter-spacing: 0 !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  color: var(--rose-deep) !important;
+  -webkit-text-fill-color: var(--rose-deep) !important;
+  text-shadow: 0 1px 0 rgba(255, 250, 242, 0.55), 0 8px 22px rgba(168, 94, 72, 0.1);
+}
+
+[dir="rtl"] .section__title .ar,
+[dir="rtl"] .final__title .ar,
+[dir="rtl"] .family-card__name .ar,
+[dir="rtl"] .rsvp-success__title .ar,
+[dir="rtl"] .final__names .ar {
+  display: inline-block;
+  line-height: inherit !important;
+  padding-block: 0.02em;
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* Other Arabic display/body lines that may include vowel marks. */
+[dir="rtl"] .hero__bismillah,
+[dir="rtl"] .hero__tagline,
+[dir="rtl"] .invite__greeting,
+[dir="rtl"] .invite__body,
+[dir="rtl"] .invite__verse-ar,
+[dir="rtl"] .detail-card__value strong,
+[dir="rtl"] .detail-card__hint,
+[dir="rtl"] .family-card__label,
+[dir="rtl"] .family-card__person,
+[dir="rtl"] .rsvp-success__msg {
+  line-height: 1.85 !important;
+  padding-block: 0.08em;
+  overflow: visible !important;
+}
+
+/* Mobile override after the compact mobile rules. Keep text fully visible on
+   320px/360px/390px phones, including Arabic marks above letters. */
+@media (max-width: 700px) {
+  .hero__inner {
+    gap: 0.58rem;
+  }
+
+  .hero__names {
+    margin-top: -0.2rem;
+    align-items: center;
+    overflow: visible !important;
+  }
+
+  .hero__name {
+    font-size: clamp(2.45rem, 15.5vw, 4rem);
+    line-height: 1.62 !important;
+    padding-block: 0.24em 0.24em !important;
+  }
+
+  .hero__name::before {
+    top: -0.72rem;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 8.4vw, 2.28rem);
+    line-height: 1.78 !important;
+    padding-block: 0.22em 0.2em !important;
+  }
+
+  .invite__greeting,
+  .invite__body,
+  .invite__verse-ar,
+  .detail-card__value strong,
+  .final__title,
+  .final__names {
+    line-height: 1.85 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero__name {
+    font-size: clamp(2.25rem, 14.5vw, 3.2rem);
+    line-height: 1.62 !important;
+  }
+
+  .section__title {
+    font-size: clamp(1.62rem, 8vw, 2.05rem);
+    line-height: 1.8 !important;
+  }
+}

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#150a20" />
+  <meta name="description" content="بكل الحب والفرح، يتشرف أحمد وهبة بدعوتكم لحضور حفل الخطوبة — Ahmad & Hiba engagement, 25 July 2026 at Qasr Khalda Halls, Amman." />
+  <meta property="og:title" content="أحمد وهبة · Ahmad & Hiba — أمسية الخطوبة" />
+  <meta property="og:description" content="٢٥ تمّوز ٢٠٢٦ · قاعات قصر خلدا، عمّان" />
+  <meta property="og:type" content="website" />
+
+  <title>أحمد وهبة · 25.07.2026</title>
+
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23f5c97e'/><stop offset='1' stop-color='%23c43e7f'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='%23150a20'/><text x='32' y='44' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='url(%23g)'>أ‍هـ</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Space+Grotesk:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-lang="ar">
+
+  <!-- ===================== ATMOSPHERE LAYERS ===================== -->
+  <div class="sky" id="sky" aria-hidden="true"></div>
+  <canvas class="stars" id="stars" aria-hidden="true"></canvas>
+  <div class="orb" id="orb" aria-hidden="true"><span class="orb__core"></span><span class="orb__halo"></span></div>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- ===================== SVG DEFS ===================== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="gMag" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f5c97e"/><stop offset="0.5" stop-color="#e85fa0"/><stop offset="1" stop-color="#8a63ac"/>
+      </linearGradient>
+      <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f5c97e"/><stop offset="1" stop-color="#c98a3a"/>
+      </linearGradient>
+      <symbol id="sprig" viewBox="0 0 120 40">
+        <path d="M60 34 Q 60 20 60 8" stroke="url(#gGold)" stroke-width="1" fill="none"/>
+        <path d="M60 24 Q 48 22 40 14 M60 18 Q 72 16 80 9 M60 30 Q 50 30 43 24 M60 30 Q 70 30 77 24"
+              stroke="url(#gGold)" stroke-width="0.8" fill="none" opacity="0.8"/>
+        <circle cx="60" cy="7" r="3" fill="url(#gMag)"/>
+        <circle cx="40" cy="14" r="2" fill="url(#gMag)"/><circle cx="80" cy="9" r="2" fill="url(#gMag)"/>
+        <line x1="6" y1="28" x2="40" y2="22" stroke="url(#gGold)" stroke-width="0.7" opacity="0.5"/>
+        <line x1="80" y1="22" x2="114" y2="28" stroke="url(#gGold)" stroke-width="0.7" opacity="0.5"/>
+        <circle cx="6" cy="28" r="1.6" fill="#e0a85e"/><circle cx="114" cy="28" r="1.6" fill="#e0a85e"/>
+      </symbol>
+      <symbol id="star4" viewBox="0 0 24 24">
+        <path d="M12 0 C 13 8 16 11 24 12 C 16 13 13 16 12 24 C 11 16 8 13 0 12 C 8 11 11 8 12 0 Z" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ===================== LOADER ===================== -->
+  <div class="loader" id="loader">
+    <div class="loader__orb"><span></span><span></span><span></span></div>
+    <div class="loader__names">أحمد &amp; هبة</div>
+    <div class="loader__sub">٢٥ · ٠٧ · ٢٠٢٦</div>
+  </div>
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav" id="nav" aria-label="Main">
+    <a href="#top" class="nav__brand" aria-label="Ahmad and Hiba">
+      <span>أ</span><em>&amp;</em><span>هـ</span>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="#invite" data-ar="الدعوة" data-en="Invitation">الدعوة</a></li>
+      <li><a href="#tale" data-ar="حكايتنا" data-en="Our Tale">حكايتنا</a></li>
+      <li><a href="#evening" data-ar="الأمسية" data-en="The Evening">الأمسية</a></li>
+      <li><a href="#families" data-ar="العائلتان" data-en="Families">العائلتان</a></li>
+      <li><a href="#venue" data-ar="المكان" data-en="Venue">المكان</a></li>
+      <li><a href="#rsvp" data-ar="الحضور" data-en="RSVP">الحضور</a></li>
+    </ul>
+    <div class="nav__tools">
+      <button class="pill pill--music" id="musicToggle" aria-label="Toggle music" aria-pressed="true" title="Music">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <span class="pill__dot"></span>
+      </button>
+      <button class="pill pill--lang" id="langToggle" aria-label="Toggle language" title="Language"><span class="pill__txt">EN</span></button>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero" id="top" data-sky data-sky-top="#ffd7a4" data-sky-bot="#f3b9c2" data-dark="false" data-stars="0.06" data-orb="1">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <p class="hero__bism rise" data-rise>
+          <span class="ar">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</span>
+          <span class="en">In the name of God, the Most Gracious</span>
+        </p>
+        <p class="eyebrow hero__eyebrow rise" data-rise data-rise-d="1">
+          <span class="ar">احفظوا التاريخ</span><span class="en">Save the Date</span>
+        </p>
+
+        <h1 class="hero__names" aria-label="Ahmad and Hiba">
+          <span class="hero__name line-mask"><span data-rise data-rise-d="2">أحمد</span></span>
+          <span class="hero__amp line-mask"><span data-rise data-rise-d="3">&amp;</span></span>
+          <span class="hero__name line-mask"><span data-rise data-rise-d="4">هبة</span></span>
+        </h1>
+        <p class="hero__names-en rise" data-rise data-rise-d="5">Ahmad &amp; Hiba</p>
+
+        <p class="hero__lede rise" data-rise data-rise-d="6">
+          <span class="ar">يتشرّفان بدعوتكم لمشاركتهما فرحة الخطوبة في أمسيةٍ من الحُلم</span>
+          <span class="en">invite you to share the joy of their engagement — an evening from a dream</span>
+        </p>
+
+        <div class="hero__meta rise" data-rise data-rise-d="7">
+          <span class="hero__date"><span class="ar">السبت · ٢٥ تمّوز ٢٠٢٦</span><span class="en">Saturday · 25 July 2026</span></span>
+          <span class="hero__dot"></span>
+          <span class="hero__place"><span class="ar">قصر خلدا · عمّان</span><span class="en">Qasr Khalda · Amman</span></span>
+        </div>
+
+        <div class="hero__actions rise" data-rise data-rise-d="8">
+          <a href="#rsvp" class="btn btn--solid magnetic"><span><span class="ar">أكّدوا حضوركم</span><span class="en">RSVP</span></span></a>
+          <a href="#invite" class="btn btn--ghost"><span><span class="ar">لنبدأ الحكاية</span><span class="en">Begin the story</span></span></a>
+        </div>
+      </div>
+
+      <div class="hero__portrait rise" data-rise data-rise-d="4">
+        <div class="hero__frame" data-parallax="0.06">
+          <img src="images/story-castle.jpg" alt="Ahmad and Hiba in an enchanted garden before a castle" />
+          <span class="hero__frame-glow"></span>
+        </div>
+        <span class="hero__spark hero__spark--1"><svg width="22" height="22"><use href="#star4"/></svg></span>
+        <span class="hero__spark hero__spark--2"><svg width="14" height="14"><use href="#star4"/></svg></span>
+        <span class="hero__spark hero__spark--3"><svg width="18" height="18"><use href="#star4"/></svg></span>
+      </div>
+    </div>
+
+    <a href="#invite" class="scrollcue" aria-label="Scroll down">
+      <span class="scrollcue__txt"><span class="ar">اسحبوا للأسفل</span><span class="en">Scroll</span></span>
+      <span class="scrollcue__line"></span>
+    </a>
+  </header>
+
+  <!-- ===================== MARQUEE ===================== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marqueeTrack">
+      <span>أحمد &amp; هبة</span><span class="marquee__star">✦</span>
+      <span>٢٥ تمّوز ٢٠٢٦</span><span class="marquee__star">✦</span>
+      <span>قصر خلدا · عمّان</span><span class="marquee__star">✦</span>
+      <span>Ahmad &amp; Hiba</span><span class="marquee__star">✦</span>
+      <span>25 July 2026</span><span class="marquee__star">✦</span>
+      <span>Qasr Khalda · Amman</span><span class="marquee__star">✦</span>
+    </div>
+  </div>
+
+  <!-- ===================== INVITATION ===================== -->
+  <section class="section invite" id="invite" data-sky data-sky-top="#fbe7ea" data-sky-bot="#f1d8e4" data-dark="false" data-stars="0.05" data-orb="0.9">
+    <div class="wrap">
+      <header class="shead rise" data-rise>
+        <p class="eyebrow"><span class="ar">دعوة من القلب</span><span class="en">A Letter From the Heart</span></p>
+        <h2 class="title"><span class="ar">شرف الدعوة</span><span class="en">The Honor of Your Presence</span></h2>
+        <span class="shead__sprig"><svg viewBox="0 0 120 40" width="120" height="40"><use href="#sprig"/></svg></span>
+      </header>
+
+      <div class="invite__card rise" data-rise data-rise-d="2">
+        <p class="invite__bism">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيم</p>
+        <div class="invite__verse">
+          <p class="invite__verse-ar">﴿وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً﴾</p>
+          <p class="invite__verse-ref"><span class="ar">سورة الروم · الآية ٢١</span><span class="en">Quran · Ar-Rum 30:21</span></p>
+        </div>
+        <p class="invite__body">
+          <span class="ar">بفضلٍ من الله، يتشرّف <strong>أحمد المغربي</strong> و<strong>هبة الشوابكة</strong> ومن خلفهما الأهل والأحبّة بدعوتكم لحضور حفل <strong>الخطوبة</strong>، في ليلةٍ يكتمل فيها الفرح وتشهد عليها العائلتان.</span>
+          <span class="en">By the grace of God, <strong>Ahmad Mughrabi</strong> and <strong>Hiba Shawabkeh</strong>, together with their families, warmly invite you to the celebration of their <strong>engagement</strong> — a night where joy is made whole.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OUR TALE (horizontal reel) ===================== -->
+  <section class="section tale" id="tale" data-sky data-sky-top="#f3cabf" data-sky-bot="#bd8fb8" data-dark="false" data-stars="0.2" data-orb="0.7">
+    <div class="wrap tale__head rise" data-rise>
+      <p class="eyebrow"><span class="ar">قصةٌ من الخيال</span><span class="en">A Fairytale of Our Own</span></p>
+      <h2 class="title"><span class="ar">حكايتنا</span><span class="en">Our Tale</span></h2>
+      <p class="lede"><span class="ar">في حديقةٍ مسحورة، حيث يبدأ كل شيء…</span><span class="en">in an enchanted garden, where everything begins…</span></p>
+      <p class="tale__hint"><span class="ar">تابعوا الحكاية وأنتم تنزلون ↓</span><span class="en">scroll to follow the story ↓</span></p>
+    </div>
+
+    <div class="tale__scroller" id="taleScroller">
+      <div class="tale__sticky">
+        <div class="tale__track" id="taleTrack">
+          <article class="chapter">
+            <div class="chapter__img"><img src="images/story-1.jpg" alt="Running toward each other in the garden" loading="lazy" /></div>
+            <div class="chapter__body">
+              <span class="chapter__no">١</span>
+              <h3 class="chapter__title"><span class="ar">اللقاء</span><span class="en">The Meeting</span></h3>
+              <p class="chapter__txt"><span class="ar">حين تلاقت الدروب، وعرف القلب طريقه دون تردّد.</span><span class="en">When paths crossed, and the heart knew its way.</span></p>
+            </div>
+          </article>
+
+          <article class="chapter">
+            <div class="chapter__img"><img src="images/story-2.jpg" alt="Lifted in joy before the castle" loading="lazy" /></div>
+            <div class="chapter__body">
+              <span class="chapter__no">٢</span>
+              <h3 class="chapter__title"><span class="ar">السؤال</span><span class="en">The Question</span></h3>
+              <p class="chapter__txt"><span class="ar">سألها… فقالت نعم، وارتفعت الفرحة حتى الأبراج.</span><span class="en">He asked… she said yes, and joy soared to the towers.</span></p>
+            </div>
+          </article>
+
+          <article class="chapter">
+            <div class="chapter__img"><img src="images/story-3.jpg" alt="Spinning in celebration" loading="lazy" /></div>
+            <div class="chapter__body">
+              <span class="chapter__no">٣</span>
+              <h3 class="chapter__title"><span class="ar">الفرح</span><span class="en">The Joy</span></h3>
+              <p class="chapter__txt"><span class="ar">رقصةٌ تحت ضوء الغروب، والأزهار المضيئة تشهد.</span><span class="en">A dance in the sunset glow, the glowing blooms as witness.</span></p>
+            </div>
+          </article>
+
+          <article class="chapter">
+            <div class="chapter__img"><img src="images/story-4.jpg" alt="A quiet embrace at dusk" loading="lazy" /></div>
+            <div class="chapter__body">
+              <span class="chapter__no">٤</span>
+              <h3 class="chapter__title"><span class="ar">السكينة</span><span class="en">The Stillness</span></h3>
+              <p class="chapter__txt"><span class="ar">وفي حضنٍ دافئ، سكنت الروح ووجدت بيتها.</span><span class="en">In a warm embrace, the soul found its home.</span></p>
+            </div>
+          </article>
+
+          <article class="chapter chapter--finale">
+            <div class="chapter__img"><img src="images/story-castle.jpg" alt="Ahmad and Hiba before the castle" loading="lazy" /></div>
+            <div class="chapter__body">
+              <span class="chapter__no chapter__no--star">✦</span>
+              <h3 class="chapter__title"><span class="ar">وبدأت الحقيقة</span><span class="en">Reality Begins</span></h3>
+              <p class="chapter__txt"><span class="ar">٢٥ تمّوز ٢٠٢٦ — فصلٌ جديد، وأنتم شهوده.</span><span class="en">July 25, 2026 — a new chapter, and you are its witnesses.</span></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VIDEO INTERLUDE ===================== -->
+  <section class="interlude" data-sky data-sky-top="#7e5da0" data-sky-bot="#3a2456" data-dark="true" data-stars="0.45" data-orb="0.45">
+    <div class="wrap interlude__inner">
+      <div class="interlude__copy rise" data-rise>
+        <p class="eyebrow eyebrow--light"><span class="ar">من الحلم… إلى الحقيقة</span><span class="en">From a dream… to reality</span></p>
+        <h2 class="interlude__title"><span class="ar">وصارت الحكاية واقعاً</span><span class="en">The tale became real</span></h2>
+        <p class="interlude__sub"><span class="ar">لحظاتٌ صغيرة، سعادةٌ كبيرة</span><span class="en">little moments, the greatest joy</span></p>
+      </div>
+      <div class="interlude__player rise" data-rise data-rise-d="1">
+        <span class="interlude__glow" aria-hidden="true"></span>
+        <video id="storyVideo" src="videostory.mp4" playsinline webkit-playsinline muted loop autoplay preload="auto" aria-label="Our story"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== THE EVENING (details) ===================== -->
+  <section class="section evening" id="evening" data-sky data-sky-top="#3a2150" data-sky-bot="#1a1140" data-dark="true" data-stars="0.9" data-orb="0.2">
+    <div class="wrap">
+      <header class="shead rise" data-rise>
+        <p class="eyebrow eyebrow--light"><span class="ar">تفاصيل الأمسية</span><span class="en">The Evening</span></p>
+        <h2 class="title title--light"><span class="ar">أمسية الخطوبة</span><span class="en">The Engagement Evening</span></h2>
+      </header>
+
+      <div class="evening__rows">
+        <div class="erow rise" data-rise>
+          <span class="erow__k"><span class="ar">التاريخ</span><span class="en">Date</span></span>
+          <span class="erow__v"><span class="ar">السبت، ٢٥ تمّوز ٢٠٢٦</span><span class="en">Saturday, 25 July 2026</span></span>
+        </div>
+        <div class="erow rise" data-rise data-rise-d="1">
+          <span class="erow__k"><span class="ar">التوقيت</span><span class="en">Time</span></span>
+          <span class="erow__v"><span class="ar">من ٥:٠٠ حتى ٨:٠٠ مساءً</span><span class="en">5:00 — 8:00 in the evening</span></span>
+        </div>
+        <div class="erow rise" data-rise data-rise-d="2">
+          <span class="erow__k"><span class="ar">المكان</span><span class="en">Venue</span></span>
+          <span class="erow__v">
+            <span class="ar">قاعات قصر خلدا · عمّان، الأردن</span><span class="en">Qasr Khalda Halls · Amman, Jordan</span>
+            <a class="erow__map" href="https://maps.app.goo.gl/Pgwn4PHyZeu8sRXn7" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M8 0a5 5 0 0 0-5 5c0 4.5 5 11 5 11s5-6.5 5-11a5 5 0 0 0-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+              <span class="ar">الخريطة</span><span class="en">Map</span>
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <div class="countdown rise" data-rise data-rise-d="2">
+        <p class="countdown__lead"><span class="ar">يفصلنا عن الفرح</span><span class="en">Counting down to the celebration</span></p>
+        <div class="countdown__row">
+          <div class="cd"><span class="cd__n" id="cd-days">--</span><span class="cd__l"><span class="ar">يوم</span><span class="en">days</span></span></div>
+          <span class="cd__sep">:</span>
+          <div class="cd"><span class="cd__n" id="cd-hours">--</span><span class="cd__l"><span class="ar">ساعة</span><span class="en">hrs</span></span></div>
+          <span class="cd__sep">:</span>
+          <div class="cd"><span class="cd__n" id="cd-minutes">--</span><span class="cd__l"><span class="ar">دقيقة</span><span class="en">min</span></span></div>
+          <span class="cd__sep">:</span>
+          <div class="cd"><span class="cd__n" id="cd-seconds">--</span><span class="cd__l"><span class="ar">ثانية</span><span class="en">sec</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAMILIES ===================== -->
+  <section class="section families" id="families" data-sky data-sky-top="#2c1b46" data-sky-bot="#171036" data-dark="true" data-stars="0.95" data-orb="0.12">
+    <div class="wrap">
+      <header class="shead rise" data-rise>
+        <p class="eyebrow eyebrow--light"><span class="ar">العائلتان الكريمتان</span><span class="en">The Two Families</span></p>
+        <h2 class="title title--light"><span class="ar">بفضل الله، تجتمع العائلتان</span><span class="en">Two Families, One Joy</span></h2>
+      </header>
+
+      <div class="fam">
+        <article class="fam__side rise" data-rise>
+          <span class="fam__crest">م</span>
+          <p class="fam__from"><span class="ar">عائلة العريس</span><span class="en">The groom's family</span></p>
+          <h3 class="fam__name"><span class="ar">آل المغربي</span><span class="en">The Mughrabi Family</span></h3>
+          <p class="fam__who"><span class="ar">العريس · أحمد</span><span class="en">Groom · Ahmad</span></p>
+        </article>
+
+        <div class="fam__link" aria-hidden="true">
+          <span class="fam__ring"></span><span class="fam__ring"></span>
+        </div>
+
+        <article class="fam__side rise" data-rise data-rise-d="2">
+          <span class="fam__crest">ش</span>
+          <p class="fam__from"><span class="ar">عائلة العروس</span><span class="en">The bride's family</span></p>
+          <h3 class="fam__name"><span class="ar">آل الشوابكة</span><span class="en">The Shawabkeh Family</span></h3>
+          <p class="fam__who"><span class="ar">العروس · هبة</span><span class="en">Bride · Hiba</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VENUE ===================== -->
+  <section class="section venue" id="venue" data-sky data-sky-top="#241640" data-sky-bot="#120c30" data-dark="true" data-stars="1" data-orb="0.1">
+    <div class="wrap">
+      <header class="shead rise" data-rise>
+        <p class="eyebrow eyebrow--light"><span class="ar">المكان</span><span class="en">The Venue</span></p>
+        <h2 class="title title--light"><span class="ar">قاعات قصر خلدا</span><span class="en">Qasr Khalda Halls</span></h2>
+        <p class="lede lede--light"><span class="ar">حيث ستكتمل الفرحة، وتُروى الحكاية</span><span class="en">where the celebration awaits</span></p>
+      </header>
+
+      <div class="vgrid">
+        <button class="vtile vtile--big rise" data-rise data-lightbox="images/venue-stage.jpg" aria-label="The stage">
+          <img src="images/venue-stage.jpg" alt="Engagement stage with florals" loading="lazy" />
+          <span class="vtile__cap"><span class="ar">المنصة</span><span class="en">The Stage</span></span>
+        </button>
+        <button class="vtile rise" data-rise data-rise-d="1" data-lightbox="images/venue-chandelier.jpg" aria-label="The chandelier">
+          <img src="images/venue-chandelier.jpg" alt="Crystal chandeliers" loading="lazy" />
+          <span class="vtile__cap"><span class="ar">الثريا</span><span class="en">The Chandelier</span></span>
+        </button>
+        <button class="vtile rise" data-rise data-rise-d="2" data-lightbox="images/venue-hall.jpg" aria-label="The hall">
+          <img src="images/venue-hall.jpg" alt="Banquet hall" loading="lazy" />
+          <span class="vtile__cap"><span class="ar">القاعة</span><span class="en">The Hall</span></span>
+        </button>
+        <button class="vtile vtile--wide rise" data-rise data-rise-d="1" data-lightbox="images/venue-exterior.jpg" aria-label="The facade">
+          <img src="images/venue-exterior.jpg" alt="Qasr Khalda exterior at night" loading="lazy" />
+          <span class="vtile__cap"><span class="ar">واجهة القصر</span><span class="en">The Facade</span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RSVP ===================== -->
+  <section class="section rsvp" id="rsvp" data-sky data-sky-top="#2a1a46" data-sky-bot="#1c1342" data-dark="true" data-stars="0.85" data-orb="0.18">
+    <div class="wrap rsvp__wrap">
+      <header class="shead rise" data-rise>
+        <p class="eyebrow eyebrow--light"><span class="ar">تأكيد الحضور</span><span class="en">RSVP</span></p>
+        <h2 class="title title--light"><span class="ar">هل ستشاركوننا الفرح؟</span><span class="en">Will You Share Our Joy?</span></h2>
+        <p class="lede lede--light"><span class="ar">يسعدنا تأكيد حضوركم قبل ١٥ تمّوز ٢٠٢٦</span><span class="en">Kindly respond before 15 July 2026</span></p>
+      </header>
+
+      <form id="rsvpForm" class="rform rise" data-rise data-rise-d="1" novalidate>
+        <div class="rform__row">
+          <label class="fld">
+            <span class="fld__l"><span class="ar">الاسم الكامل</span><span class="en">Full Name</span></span>
+            <input type="text" name="name" id="rsvpName" required autocomplete="name" placeholder=" " />
+          </label>
+          <label class="fld">
+            <span class="fld__l"><span class="ar">رقم الهاتف</span><span class="en">Phone</span></span>
+            <input type="tel" name="phone" id="rsvpPhone" required autocomplete="tel" placeholder=" " />
+          </label>
+        </div>
+        <div class="rform__row">
+          <label class="fld">
+            <span class="fld__l"><span class="ar">عدد الأشخاص</span><span class="en">Guests</span></span>
+            <input type="number" name="guests" id="rsvpGuests" min="1" max="20" value="1" required />
+          </label>
+          <fieldset class="fld fld--radio">
+            <legend class="fld__l"><span class="ar">هل ستحضرون؟</span><span class="en">Attending?</span></legend>
+            <div class="seg">
+              <label class="seg__opt"><input type="radio" name="attending" value="yes" checked /><span><span class="ar">نعم، سأحضر</span><span class="en">Yes</span></span></label>
+              <label class="seg__opt"><input type="radio" name="attending" value="no" /><span><span class="ar">للأسف، لا</span><span class="en">No</span></span></label>
+            </div>
+          </fieldset>
+        </div>
+        <button type="submit" class="btn btn--solid btn--full magnetic" id="rsvpSubmit">
+          <span><span class="ar">أرسل التأكيد</span><span class="en">Send RSVP</span></span>
+        </button>
+      </form>
+
+      <div class="rdone" id="rsvpSuccess" aria-hidden="true">
+        <span class="rdone__star"><svg viewBox="0 0 24 24" width="40" height="40"><use href="#star4"/></svg></span>
+        <h3><span class="ar">شكراً لكم من القلب</span><span class="en">Thank you, from the heart</span></h3>
+        <p><span class="ar">وصلنا تأكيدكم · بانتظاركم لتكتمل الفرحة</span><span class="en">Your reply is in — we can't wait to see you</span></p>
+      </div>
+
+      <div class="wa rise" data-rise data-rise-d="2">
+        <p class="wa__l"><span class="ar">لأي استفسار، تواصلوا معنا عبر واتساب</span><span class="en">Questions? Reach us on WhatsApp</span></p>
+        <div class="wa__row">
+          <a class="wa__btn" id="whatsappAhmad" href="https://wa.me/962795183834" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.512 5.26l.072.114-1.001 3.654 3.746-.982.16.095zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+            <span><b><span class="ar">أحمد</span><span class="en">Ahmad</span></b><small><span class="ar">العريس</span><span class="en">Groom</span></small></span>
+          </a>
+          <a class="wa__btn" id="whatsappHiba" href="https://wa.me/962777632663" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.512 5.26l.072.114-1.001 3.654 3.746-.982.16.095zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+            <span><b><span class="ar">هبة</span><span class="en">Hiba</span></b><small><span class="ar">العروس</span><span class="en">Bride</span></small></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINALE ===================== -->
+  <section class="section finale" data-sky data-sky-top="#ecc9c9" data-sky-bot="#f7dcc2" data-dark="false" data-stars="0.18" data-orb="0.85">
+    <div class="wrap finale__wrap">
+      <div class="finale__photo rise" data-rise>
+        <img src="images/couple-real.jpg" alt="Ahmad and Hiba" />
+      </div>
+      <p class="eyebrow rise" data-rise data-rise-d="1"><span class="ar">وبدأت الحكاية الحقيقية</span><span class="en">And so the real story begins</span></p>
+      <h2 class="finale__title rise" data-rise data-rise-d="2"><span class="ar">وعاشا بسعادةٍ إلى الأبد</span><span class="en">Happily ever after</span></h2>
+      <p class="finale__names rise" data-rise data-rise-d="3">أحمد <em>&amp;</em> هبة</p>
+      <p class="finale__date rise" data-rise data-rise-d="4">٢٥ · ٠٧ · ٢٠٢٦</p>
+    </div>
+    <footer class="footer">
+      <span class="ar">صُنع بكل الحب · أحمد وهبة ٢٠٢٦</span>
+      <span class="en">Made with love · Ahmad &amp; Hiba 2026</span>
+    </footer>
+  </section>
+
+  <!-- ===================== LIGHTBOX ===================== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox__x" id="lightboxClose" aria-label="Close"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg></button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
+
+  <!-- ===================== MUSIC HINT ===================== -->
+  <button class="mhint" id="musicHint" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    <span class="ar">انقروا لتشغيل الموسيقى</span><span class="en">Tap to play music</span>
+  </button>
+
+  <audio id="bgMusic" loop preload="auto"><source src="audio/background.mp3" type="audio/mpeg" /></audio>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
